@@ -1,0 +1,672 @@
+<style>
+.stApp {
+  background: linear-gradient(135deg, #F5F7F2 0%, #EEF3EA 45%, #E1E9D5 100%);
+}
+.block-container {
+  padding-top: 1.5rem;
+  padding-bottom: 3rem;
+  max-width: 1180px;
+}
+[data-testid="stSidebar"] {
+  background: #EEF3EA;
+}
+.hero-card {
+  background: linear-gradient(135deg, #556B2F, #33401D);
+  color: white;
+  padding: 30px;
+  border-radius: 30px;
+  box-shadow: 0 20px 55px rgba(51,64,29,.25);
+  margin-bottom: 20px;
+}
+.hero-title {
+  font-size: 42px;
+  font-weight: 850;
+  margin-bottom: 4px;
+}
+.hero-subtitle {
+  font-size: 17px;
+  opacity: .92;
+}
+.quote-card, .soft-card {
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(85,107,47,.14);
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0 12px 32px rgba(60,72,50,.10);
+  margin-bottom: 18px;
+}
+.metric-card {
+  background: white;
+  border-radius: 24px;
+  padding: 20px;
+  border: 1px solid rgba(85,107,47,.13);
+  box-shadow: 0 10px 28px rgba(60,72,50,.09);
+  min-height: 112px;
+}
+.metric-label {
+  color: #5F6368;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+.metric-value {
+  color: #33401D;
+  font-size: 30px;
+  font-weight: 850;
+}
+.status-ok {
+  color: #1F7A3A;
+  font-weight: 700;
+}
+.status-warn {
+  color: #A66A00;
+  font-weight: 700;
+}
+div.stButton > button {
+  border-radius: 14px;
+  border: 0;
+  background: #556B2F;
+  color: white;
+  font-weight: 750;
+}
+div.stButton > button:hover {
+  background: #33401D;
+  color: white;
+}
+
+.stApp {
+    background: #f5f7f2;
+}
+
+.stButton button {
+    border-radius: 16px;
+    height: 70px;
+    font-size: 22px;
+}
+
+[data-testid="stMetric"] {
+    background: white;
+    border-radius: 18px;
+    padding: 10px;
+}
+
+
+</style>
+
+<style>
+/* Novo layout de criação de atividade */
+.new-activity-panel {
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(85, 107, 47, 0.14);
+    border-radius: 24px;
+    padding: 6px 4px 2px 4px;
+}
+
+.category-card {
+    background: #ffffff;
+    border: 1px solid rgba(85, 107, 47, 0.14);
+    border-radius: 20px;
+    padding: 18px 8px 14px 8px;
+    text-align: center;
+    min-height: 112px;
+    box-shadow: 0 8px 22px rgba(60, 72, 50, 0.07);
+    transition: all 0.18s ease-in-out;
+    margin-bottom: 6px;
+}
+
+.category-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(60, 72, 50, 0.10);
+}
+
+.category-card.selected {
+    border: 2px solid #2f7d32;
+    background: linear-gradient(135deg, #f8fff5, #eef7e9);
+}
+
+.category-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: #eef5ea;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.category-name {
+    color: #102a1f;
+    font-weight: 750;
+    font-size: 15px;
+}
+
+.tip-card {
+    margin: 18px 0;
+    padding: 16px 18px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #f0f8ed, #ffffff);
+    border: 1px solid rgba(85, 107, 47, 0.13);
+    color: #31512d;
+}
+
+.tip-icon {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.summary-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 18px 10px;
+    text-align: center;
+    border: 1px solid rgba(85, 107, 47, 0.12);
+    box-shadow: 0 8px 22px rgba(60, 72, 50, 0.07);
+    margin-bottom: 12px;
+}
+
+.summary-value {
+    color: #33401D;
+    font-size: 30px;
+    font-weight: 850;
+}
+
+.summary-label {
+    color: #5F6368;
+    font-size: 13px;
+}
+
+.activity-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #eef5ea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+}
+
+.category-row {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    border: 1px solid rgba(85, 107, 47, 0.10);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+</style>
+
+<style>
+/* =========================================================
+   Seletor profissional de categorias
+   Implementado sobre st.radio para evitar botão e rerun manual
+========================================================= */
+
+div[role="radiogroup"] label > div:first-child {
+    display: none !important;
+}
+
+div[role="radiogroup"] {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+    align-items: stretch !important;
+}
+
+div[role="radiogroup"] label {
+    min-width: 108px !important;
+    max-width: 135px !important;
+    min-height: 92px !important;
+    background: #ffffff !important;
+    border: 1px solid rgba(85, 107, 47, 0.16) !important;
+    border-radius: 22px !important;
+    padding: 16px 14px !important;
+    margin: 0 !important;
+    box-shadow: 0 8px 22px rgba(60, 72, 50, 0.07) !important;
+    cursor: pointer !important;
+    transition: all 0.18s ease-in-out !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+}
+
+div[role="radiogroup"] label p {
+    font-size: 15px !important;
+    font-weight: 750 !important;
+    color: #102a1f !important;
+    line-height: 1.35 !important;
+    white-space: normal !important;
+}
+
+div[role="radiogroup"] label:hover {
+    transform: translateY(-2px) !important;
+    border-color: rgba(47, 125, 50, 0.55) !important;
+    background: linear-gradient(135deg, #ffffff, #f5fbf1) !important;
+    box-shadow: 0 12px 28px rgba(60, 72, 50, 0.11) !important;
+}
+
+div[role="radiogroup"] label:has(input[aria-checked="true"]) {
+    border: 2px solid #2f7d32 !important;
+    background: linear-gradient(135deg, #f8fff5, #eef7e9) !important;
+    box-shadow: 0 12px 28px rgba(47, 125, 50, 0.16) !important;
+    position: relative !important;
+}
+
+div[role="radiogroup"] label:has(input[aria-checked="true"])::after {
+    content: "✓";
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    background: #2f7d32;
+    color: white;
+    font-size: 14px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 14px rgba(47, 125, 50, 0.28);
+}
+
+.selected-category-panel {
+    margin-top: 16px;
+    margin-bottom: 18px;
+    padding: 13px 16px;
+    border-radius: 18px;
+    background: rgba(240, 248, 237, 0.95);
+    border: 1px solid rgba(85, 107, 47, 0.13);
+    color: #31512d;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.selected-category-check {
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    background: #2f7d32;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+}
+
+@media (max-width: 768px) {
+    div[role="radiogroup"] label {
+        min-width: 92px !important;
+        max-width: 112px !important;
+        min-height: 82px !important;
+        padding: 12px 10px !important;
+    }
+
+    div[role="radiogroup"] label p {
+        font-size: 13px !important;
+    }
+}
+</style>
+
+<style>
+/* =========================================================
+   Atividades com efeito papel + check imersivo
+========================================================= */
+
+.activity-paper-card {
+    position: relative;
+    background: #fffef8;
+    border: 1px solid rgba(120, 105, 70, 0.16);
+    border-radius: 18px;
+    padding: 16px 18px 16px 20px;
+    margin-bottom: 14px;
+    box-shadow: 0 8px 22px rgba(60, 72, 50, 0.07);
+    overflow: hidden;
+}
+
+.activity-paper-card.pending {
+    background:
+        linear-gradient(180deg, #fffefb 0%, #fffaf0 100%);
+}
+
+.activity-paper-card.done {
+    background:
+        linear-gradient(180deg, #f7fbff 0%, #eef7ff 100%);
+    border-color: rgba(30, 136, 229, 0.20);
+}
+
+.activity-paper-line {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 6px;
+    height: 100%;
+    background: linear-gradient(180deg, #d9caa3, #cfc19a);
+    opacity: 0.65;
+}
+
+.activity-paper-card.done .activity-paper-line {
+    background: linear-gradient(180deg, #42a5f5, #1e88e5);
+    opacity: 0.9;
+}
+
+.activity-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.activity-card-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    background: #eef5ea;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.activity-title {
+    color: #25351f;
+    font-weight: 800;
+    font-size: 17px;
+    position: relative;
+}
+
+.activity-title.done,
+.activity-desc.done {
+    color: #6b7c89;
+}
+
+/* Risco estilo caneta no título e na descrição */
+.activity-title.done::after {
+    content: "";
+    position: absolute;
+    left: -2px;
+    right: -4px;
+    top: 54%;
+    height: 3px;
+    background: rgba(30, 136, 229, 0.70);
+    border-radius: 999px;
+    transform: rotate(-1deg);
+}
+
+.activity-desc.done {
+    text-decoration-line: line-through;
+    text-decoration-thickness: 2px;
+    text-decoration-color: rgba(30, 136, 229, 0.60);
+}
+
+.activity-meta {
+    color: #6f7869;
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.activity-desc {
+    color: #52604c;
+    font-size: 14px;
+}
+
+/* Check pendente: botão claro */
+div[data-testid="stButton"] button[key^="complete_"] {
+    border-radius: 999px !important;
+}
+
+/* Estilo geral do botão de check das atividades */
+div[data-testid="stButton"] > button {
+    border-radius: 999px;
+}
+
+/* Check concluído azul */
+.check-button.done {
+    width: 42px;
+    height: 42px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #42a5f5, #1e88e5);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 900;
+    box-shadow: 0 8px 18px rgba(30, 136, 229, 0.28);
+    margin-top: 14px;
+}
+
+/* Ajuste visual do botão pendente dentro da coluna esquerda */
+div[data-testid="column"]:has(button[kind="secondary"]) button {
+    min-height: 42px;
+    max-height: 42px;
+    color: #9fb29a !important;
+    background: #f5f9f2 !important;
+    border: 1px solid #dce8d5 !important;
+    font-size: 20px !important;
+    font-weight: 900 !important;
+    box-shadow: none !important;
+}
+
+div[data-testid="column"]:has(button[kind="secondary"]) button:hover {
+    color: #1e88e5 !important;
+    border-color: rgba(30, 136, 229, 0.45) !important;
+    background: #eef7ff !important;
+}
+
+/* Sensação de papel pautado discreto */
+.activity-paper-card::after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    right: 18px;
+    bottom: 10px;
+    height: 1px;
+    background: rgba(120, 105, 70, 0.08);
+}
+</style>
+
+<style>
+/* =========================================================
+   Toggle de atividade: pendente <-> realizada
+========================================================= */
+
+/* Botão claro quando a atividade ainda não foi feita */
+button[title="Marcar como realizada"] {
+    min-height: 42px !important;
+    max-height: 42px !important;
+    border-radius: 999px !important;
+    color: #9fb29a !important;
+    background: #f5f9f2 !important;
+    border: 1px solid #dce8d5 !important;
+    font-size: 20px !important;
+    font-weight: 900 !important;
+    box-shadow: none !important;
+}
+
+button[title="Marcar como realizada"]:hover {
+    color: #1e88e5 !important;
+    border-color: rgba(30, 136, 229, 0.45) !important;
+    background: #eef7ff !important;
+}
+
+/* Botão azul quando a atividade já foi feita */
+button[title="Desmarcar atividade"] {
+    min-height: 42px !important;
+    max-height: 42px !important;
+    border-radius: 999px !important;
+    background: linear-gradient(135deg, #42a5f5, #1e88e5) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(30, 136, 229, 0.20) !important;
+    font-size: 20px !important;
+    font-weight: 900 !important;
+    box-shadow: 0 8px 18px rgba(30, 136, 229, 0.28) !important;
+}
+
+button[title="Desmarcar atividade"]:hover {
+    background: linear-gradient(135deg, #64b5f6, #1976d2) !important;
+    border-color: rgba(25, 118, 210, 0.35) !important;
+}
+
+/* Garante que o visual antigo do check concluído não apareça se existir CSS anterior */
+.check-button.done {
+    display: none !important;
+}
+</style>
+
+<style>
+/* =========================================================
+   Botão de cancelamento de agendamento
+========================================================= */
+button[title="Cancelar agendamento"] {
+    min-height: 38px !important;
+    max-height: 38px !important;
+    border-radius: 999px !important;
+    color: #9c6b6b !important;
+    background: #fff6f4 !important;
+    border: 1px solid #f1d2cc !important;
+    font-size: 20px !important;
+    font-weight: 800 !important;
+    box-shadow: none !important;
+}
+
+button[title="Cancelar agendamento"]:hover {
+    color: #ffffff !important;
+    background: #d65f4c !important;
+    border-color: #d65f4c !important;
+}
+</style>
+
+<style>
+/* =========================================================
+   Frequência simples: diária, semanal e uma vez
+========================================================= */
+
+.frequency-hint {
+    margin-top: 10px;
+    margin-bottom: 16px;
+    padding: 13px 16px;
+    border-radius: 18px;
+    background: rgba(240, 248, 237, 0.95);
+    border: 1px solid rgba(85, 107, 47, 0.13);
+    color: #31512d;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.frequency-hint span {
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    background: #2f7d32;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+}
+
+div[role="radiogroup"] label p {
+    font-weight: 700 !important;
+}
+</style>
+
+<style>
+/* =========================================================
+   Responsividade da frequência e dias da semana
+========================================================= */
+
+div[data-testid="stRadio"] {
+    margin-bottom: 10px;
+}
+
+/* Em telas menores, radios quebram linha de forma natural */
+div[role="radiogroup"] {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+}
+
+/* Opções de frequência mais compactas */
+div[role="radiogroup"] label {
+    min-height: 44px !important;
+}
+
+/* O seletor de dia da semana fica compacto em mobile */
+@media (max-width: 768px) {
+    div[role="radiogroup"] label {
+        min-width: 72px !important;
+        max-width: 110px !important;
+        padding: 10px 8px !important;
+    }
+
+    div[role="radiogroup"] label p {
+        font-size: 13px !important;
+    }
+}
+</style>
+
+<style>
+/* =========================================================
+   Refinamento responsivo de frequência
+   Frequência fica fora do form para atualizar imediatamente
+========================================================= */
+
+.frequency-hint {
+    margin-top: 10px;
+    margin-bottom: 16px;
+    padding: 13px 16px;
+    border-radius: 18px;
+    background: rgba(240, 248, 237, 0.95);
+    border: 1px solid rgba(85, 107, 47, 0.13);
+    color: #31512d;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.frequency-hint span {
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    background: #2f7d32;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+}
+
+/* Radios com quebra natural em telas menores */
+div[role="radiogroup"] {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+}
+
+div[role="radiogroup"] label {
+    min-height: 42px !important;
+    padding: 9px 12px !important;
+}
+
+@media (max-width: 768px) {
+    div[role="radiogroup"] {
+        gap: 6px !important;
+    }
+
+    div[role="radiogroup"] label {
+        min-width: 76px !important;
+        max-width: 100% !important;
+        padding: 9px 10px !important;
+    }
+
+    div[role="radiogroup"] label p {
+        font-size: 13px !important;
+    }
+}
+</style>
