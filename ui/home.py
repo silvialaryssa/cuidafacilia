@@ -15,6 +15,7 @@ from services.app_service import (
 from ui.activity_cards import render_activity_card
 from ui.category_selector import CATEGORIAS, render_category_selector
 from ui.dashboard_cards import render_summary_cards
+from ui.components import figure_card
 
 
 FREQUENCIAS = ["Diária", "Semanal", "Uma vez"]
@@ -47,6 +48,14 @@ def render_home(user: dict) -> None:
 
     st.subheader(f"Olá, {user.get('nome', 'usuário')} 👋")
     st.write("Aqui aparecem apenas as atividades previstas para hoje, de acordo com sua agenda.")
+    st.markdown(
+        """
+        <div class="section-intro">
+            Dica rápida: selecione uma categoria, defina frequência e horário, e acompanhe sua evolução no painel ao lado.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
     if st.session_state.get("save_message"):
         st.success(st.session_state.pop("save_message"))
@@ -222,6 +231,8 @@ def render_home(user: dict) -> None:
 
     with side_col:
         render_summary_cards(total, concluidas, pendentes, progresso)
+        figure_card("📌", "Fluxo do dia", "1) Criar agenda  2) Marcar concluída  3) Acompanhar progresso")
+        figure_card("🌤️", "Ritmo saudável", "Pequenas ações diárias geram resultado real em poucos dias.")
 
         st.markdown("### Categorias de hoje")
         if activities.empty:

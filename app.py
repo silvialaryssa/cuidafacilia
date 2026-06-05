@@ -13,6 +13,8 @@ from services.app_service import (
 from ui.admin import render_admin
 from ui.components import hero, load_css, quote_card
 from ui.home import render_home
+from ui.landing import render_landing
+from ui.plant_ai import render_plant_ai
 from ui.progress import render_progress
 from ui.setup import render_setup
 from utils.proverbios import random_proverb
@@ -33,6 +35,7 @@ if "proverbio" not in st.session_state:
 with st.sidebar:
     st.title("🌿 CuidaFácil")
     st.caption("Cuidados simples. Constância real.")
+    st.caption("Navegue por módulos para acompanhar sua rotina com clareza.")
     st.divider()
 
     if "user" not in st.session_state:
@@ -72,7 +75,7 @@ with st.sidebar:
                         st.session_state["nome"] = user.get("nome", "")
                         st.session_state["email"] = user.get("email", email_limpo)
                         st.session_state["session_recorded"] = False
-                        st.session_state["page"] = "Início"
+                        st.session_state["page"] = "🏠 Início"
                         st.session_state["login_message"] = (
                             f"Bem-vindo de volta, {user.get('nome', '')}!"
                         )
@@ -118,7 +121,7 @@ with st.sidebar:
                     st.session_state["nome"] = user.get("nome", primeiro_nome_limpo)
                     st.session_state["email"] = user.get("email", email_limpo)
                     st.session_state["session_recorded"] = False
-                    st.session_state["page"] = "Início"
+                    st.session_state["page"] = "🏠 Início"
                     st.session_state["login_message"] = (
                         "Cadastro criado com sucesso. Bem-vindo ao CuidaFácil!"
                     )
@@ -130,13 +133,13 @@ with st.sidebar:
         st.caption(user.get("email", ""))
 
         is_admin_sidebar = user.get("email", "").strip().lower() == admin_email()
-        page_options = ["Início", "Meu progresso", "Configuração inicial"]
+        page_options = ["🏠 Início", "📊 Meu progresso", "🪴 Cuidador IA de Plantas", "⚙️ Configuração inicial"]
         if is_admin_sidebar:
-            page_options.insert(2, "Admin")
+            page_options.insert(2, "🧪 Admin")
 
-        current_page = st.session_state.get("page", "Início")
+        current_page = st.session_state.get("page", "🏠 Início")
         if current_page not in page_options:
-            current_page = "Início"
+            current_page = "🏠 Início"
 
         st.session_state["page"] = st.radio(
             "Navegação",
@@ -158,12 +161,14 @@ if st.session_state.get("login_message"):
 if "user" not in st.session_state:
     page = st.radio(
         "Antes de começar",
-        ["Entrar", "Configuração inicial"],
+        ["Landing", "Entrar", "Configuração inicial"],
         horizontal=True,
         label_visibility="collapsed",
     )
 
-    if page == "Entrar":
+    if page == "Landing":
+        render_landing()
+    elif page == "Entrar":
         st.info(
             "Escolha na lateral se você já tem cadastro ou se deseja criar uma conta. "
             "Para entrar, usamos apenas seu e-mail."
@@ -176,14 +181,16 @@ if "user" not in st.session_state:
 user = st.session_state["user"]
 record_session_once(user)
 
-page = st.session_state.get("page", "Início")
+page = st.session_state.get("page", "🏠 Início")
 is_admin = user.get("email", "").strip().lower() == admin_email()
 
-if page == "Início":
+if page == "🏠 Início":
     render_home(user)
-elif page == "Meu progresso":
+elif page == "📊 Meu progresso":
     render_progress(user)
-elif page == "Admin" and is_admin:
+elif page == "🪴 Cuidador IA de Plantas":
+    render_plant_ai(user)
+elif page == "🧪 Admin" and is_admin:
     render_admin(user)
 else:
     render_setup()

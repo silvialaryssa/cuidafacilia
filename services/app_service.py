@@ -439,5 +439,46 @@ def user_progress_summary(user: dict) -> dict:
     }
 
 
+
+def get_app_config() -> dict[str, str]:
+    return get_repo().read_config()
+
+
+def save_app_config(chave: str, valor: str) -> bool:
+    sucesso = get_repo().upsert_config(chave, valor, now_iso())
+    clear_data_cache()
+    return sucesso
+
+
+def get_ai_settings() -> dict[str, str]:
+    from config.settings import default_ai_model, default_ai_provider
+
+    config = get_app_config()
+    provider = config.get("ai_provider", default_ai_provider()).strip().lower()
+    if provider not in {"openai", "gemini"}:
+        provider = default_ai_provider()
+
+    model = config.get("ai_model", "").strip() or default_ai_model()
+
+    return {
+        "provider": provider,
+        "model": model,
+    }
+
+
+def save_ai_settings(provider: str, model: str) -> bool:
+    provider = provider.strip().lower()
+    if provider not in {"openai", "gemini"}:
+        raise ValueError("Provedor de IA inválido. Use 'openai' ou 'gemini'.")
+
+    if not model.strip():
+        raise ValueError("Informe o modelo de IA.")
+
+    ok_provider = save_app_config("ai_provider", provider)
+    ok_model = save_app_config("ai_model", model.strip())
+
+    return bool(ok_provider and ok_model)
+
+
 def all_data() -> dict[str, pd.DataFrame]:
     return read_all_data_cached()
