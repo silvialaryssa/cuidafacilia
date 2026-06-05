@@ -12,8 +12,18 @@ def hero(title: str, subtitle: str) -> None:
     st.markdown(
         f'''
         <div class="hero-card">
-            <div class="hero-title">{title}</div>
-            <div class="hero-subtitle">{subtitle}</div>
+            <div class="hero-content">
+                <div class="hero-copy">
+                    <div class="hero-title">{title}</div>
+                    <div class="hero-subtitle">{subtitle}</div>
+                    <div class="hero-badges">
+                        <span class="hero-badge">Rotina simples</span>
+                        <span class="hero-badge">Visual claro</span>
+                        <span class="hero-badge">Mobile friendly</span>
+                    </div>
+                </div>
+                <div class="hero-figure" aria-hidden="true">🌿</div>
+            </div>
         </div>
         ''',
         unsafe_allow_html=True,
@@ -38,6 +48,21 @@ def metric_card(label: str, value: str) -> None:
         <div class="metric-card">
             <div class="metric-label">{label}</div>
             <div class="metric-value">{value}</div>
+        </div>
+        ''',
+        unsafe_allow_html=True,
+    )
+
+
+def figure_card(icon: str, title: str, text: str) -> None:
+    st.markdown(
+        f'''
+        <div class="figure-card">
+            <div class="figure-icon">{icon}</div>
+            <div class="figure-copy">
+                <strong>{title}</strong>
+                <span>{text}</span>
+            </div>
         </div>
         ''',
         unsafe_allow_html=True,

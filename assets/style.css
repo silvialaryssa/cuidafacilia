@@ -1,672 +1,649 @@
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800;900&family=Fraunces:opsz,wght@9..144,700;9..144,800&display=swap');
+
+:root {
+  --bg-1: #f6f4ea;
+  --bg-2: #e8f3e6;
+  --bg-3: #d8e8cb;
+  --surface: #ffffff;
+  --surface-soft: #f7fbf5;
+  --primary: #2f6f42;
+  --primary-strong: #214f31;
+  --accent: #f2b24c;
+  --text: #1f2a23;
+  --muted: #5d6d62;
+  --line: rgba(47, 111, 66, 0.18);
+  --shadow: 0 12px 30px rgba(33, 79, 49, 0.12);
+}
+
 .stApp {
-  background: linear-gradient(135deg, #F5F7F2 0%, #EEF3EA 45%, #E1E9D5 100%);
+  background:
+    radial-gradient(circle at 8% 8%, rgba(242, 178, 76, 0.18) 0%, transparent 35%),
+    radial-gradient(circle at 94% 12%, rgba(47, 111, 66, 0.2) 0%, transparent 36%),
+    linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 52%, var(--bg-3) 100%);
+  color: var(--text);
+  font-family: 'Nunito', sans-serif;
 }
+
 .block-container {
-  padding-top: 1.5rem;
-  padding-bottom: 3rem;
-  max-width: 1180px;
+  max-width: 1200px;
+  padding-top: 1.1rem;
+  padding-bottom: 2.5rem;
 }
+
+h1, h2, h3 {
+  font-family: 'Fraunces', serif;
+  color: #173423;
+  letter-spacing: 0.1px;
+}
+
 [data-testid="stSidebar"] {
-  background: #EEF3EA;
+  background: linear-gradient(180deg, #e8f3e6 0%, #edf6e9 100%);
+  border-right: 1px solid rgba(47, 111, 66, 0.16);
 }
+
 .hero-card {
-  background: linear-gradient(135deg, #556B2F, #33401D);
-  color: white;
-  padding: 30px;
-  border-radius: 30px;
-  box-shadow: 0 20px 55px rgba(51,64,29,.25);
-  margin-bottom: 20px;
+  border-radius: 28px;
+  padding: 24px;
+  margin-bottom: 16px;
+  box-shadow: 0 20px 52px rgba(33, 79, 49, 0.23);
+  background:
+    radial-gradient(circle at 80% 20%, rgba(242, 178, 76, 0.3) 0%, transparent 35%),
+    linear-gradient(135deg, #2f6f42 0%, #1c4730 100%);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
+
+.hero-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.hero-copy {
+  flex: 1;
+  min-width: 200px;
+}
+
 .hero-title {
-  font-size: 42px;
-  font-weight: 850;
-  margin-bottom: 4px;
-}
-.hero-subtitle {
-  font-size: 17px;
-  opacity: .92;
-}
-.quote-card, .soft-card {
-  background: rgba(255,255,255,.92);
-  border: 1px solid rgba(85,107,47,.14);
-  border-radius: 24px;
-  padding: 20px;
-  box-shadow: 0 12px 32px rgba(60,72,50,.10);
-  margin-bottom: 18px;
-}
-.metric-card {
-  background: white;
-  border-radius: 24px;
-  padding: 20px;
-  border: 1px solid rgba(85,107,47,.13);
-  box-shadow: 0 10px 28px rgba(60,72,50,.09);
-  min-height: 112px;
-}
-.metric-label {
-  color: #5F6368;
-  font-size: 14px;
+  font-size: clamp(1.8rem, 2.9vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.12;
   margin-bottom: 6px;
 }
+
+.hero-subtitle {
+  opacity: 0.94;
+  font-size: 1rem;
+  max-width: 65ch;
+}
+
+.hero-badges {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hero-badge {
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.hero-figure {
+  width: 132px;
+  min-width: 132px;
+  height: 132px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.55) 20%, transparent 48%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.06));
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.3rem;
+}
+
+.quote-card,
+.soft-card {
+  background: rgba(255, 255, 255, 0.93);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 18px;
+  box-shadow: var(--shadow);
+  margin-bottom: 14px;
+}
+
+.metric-card {
+  background: var(--surface);
+  border-radius: 20px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  box-shadow: 0 9px 24px rgba(33, 79, 49, 0.1);
+  min-height: 108px;
+}
+
+.metric-label {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+
 .metric-value {
-  color: #33401D;
-  font-size: 30px;
-  font-weight: 850;
-}
-.status-ok {
-  color: #1F7A3A;
-  font-weight: 700;
-}
-.status-warn {
-  color: #A66A00;
-  font-weight: 700;
-}
-div.stButton > button {
-  border-radius: 14px;
-  border: 0;
-  background: #556B2F;
-  color: white;
-  font-weight: 750;
-}
-div.stButton > button:hover {
-  background: #33401D;
-  color: white;
+  color: #173a29;
+  font-size: 1.9rem;
+  line-height: 1.05;
+  font-weight: 900;
 }
 
-.stApp {
-    background: #f5f7f2;
-}
-
-.stButton button {
-    border-radius: 16px;
-    height: 70px;
-    font-size: 22px;
-}
-
-[data-testid="stMetric"] {
-    background: white;
-    border-radius: 18px;
-    padding: 10px;
-}
-
-
-</style>
-
-<style>
-/* Novo layout de criação de atividade */
 .new-activity-panel {
-    background: rgba(255, 255, 255, 0.92);
-    border: 1px solid rgba(85, 107, 47, 0.14);
-    border-radius: 24px;
-    padding: 6px 4px 2px 4px;
-}
-
-.category-card {
-    background: #ffffff;
-    border: 1px solid rgba(85, 107, 47, 0.14);
-    border-radius: 20px;
-    padding: 18px 8px 14px 8px;
-    text-align: center;
-    min-height: 112px;
-    box-shadow: 0 8px 22px rgba(60, 72, 50, 0.07);
-    transition: all 0.18s ease-in-out;
-    margin-bottom: 6px;
-}
-
-.category-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 26px rgba(60, 72, 50, 0.10);
-}
-
-.category-card.selected {
-    border: 2px solid #2f7d32;
-    background: linear-gradient(135deg, #f8fff5, #eef7e9);
-}
-
-.category-icon {
-    width: 58px;
-    height: 58px;
-    border-radius: 50%;
-    background: #eef5ea;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    margin-bottom: 8px;
-}
-
-.category-name {
-    color: #102a1f;
-    font-weight: 750;
-    font-size: 15px;
-}
-
-.tip-card {
-    margin: 18px 0;
-    padding: 16px 18px;
-    border-radius: 18px;
-    background: linear-gradient(135deg, #f0f8ed, #ffffff);
-    border: 1px solid rgba(85, 107, 47, 0.13);
-    color: #31512d;
-}
-
-.tip-icon {
-    margin-right: 10px;
-    font-size: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 10px 10px 6px 10px;
 }
 
 .summary-card {
-    background: #ffffff;
-    border-radius: 18px;
-    padding: 18px 10px;
-    text-align: center;
-    border: 1px solid rgba(85, 107, 47, 0.12);
-    box-shadow: 0 8px 22px rgba(60, 72, 50, 0.07);
-    margin-bottom: 12px;
+  background: #fff;
+  border-radius: 18px;
+  padding: 14px 10px;
+  text-align: center;
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 20px rgba(33, 79, 49, 0.08);
+  margin-bottom: 10px;
 }
 
 .summary-value {
-    color: #33401D;
-    font-size: 30px;
-    font-weight: 850;
+  color: #1f4e34;
+  font-size: 1.9rem;
+  font-weight: 900;
 }
 
 .summary-label {
-    color: #5F6368;
-    font-size: 13px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 700;
 }
 
-.activity-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: #eef5ea;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
+.tip-card,
+.figure-card {
+  margin: 14px 0;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #f2f9f1 0%, #ffffff 100%);
+  border: 1px solid rgba(47, 111, 66, 0.15);
+  color: #2c563e;
+}
+
+.figure-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.figure-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: rgba(47, 111, 66, 0.12);
+  font-size: 1.3rem;
+}
+
+.figure-copy strong {
+  display: block;
+  font-size: 0.95rem;
+  color: #1a4530;
+}
+
+.figure-copy span {
+  font-size: 0.84rem;
+  color: #4f6658;
+}
+
+.tip-icon {
+  margin-right: 8px;
+  font-size: 1.1rem;
 }
 
 .category-row {
-    background: #ffffff;
-    border-radius: 14px;
-    padding: 12px 14px;
-    margin-bottom: 8px;
-    border: 1px solid rgba(85, 107, 47, 0.10);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-</style>
-
-<style>
-/* =========================================================
-   Seletor profissional de categorias
-   Implementado sobre st.radio para evitar botão e rerun manual
-========================================================= */
-
-div[role="radiogroup"] label > div:first-child {
-    display: none !important;
+  background: #fff;
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-div[role="radiogroup"] {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 12px !important;
-    align-items: stretch !important;
+.selected-category-panel,
+.frequency-hint {
+  margin-top: 12px;
+  margin-bottom: 14px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(242, 249, 240, 0.98);
+  border: 1px solid rgba(47, 111, 66, 0.16);
+  color: #2b5a3f;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-div[role="radiogroup"] label {
-    min-width: 108px !important;
-    max-width: 135px !important;
-    min-height: 92px !important;
-    background: #ffffff !important;
-    border: 1px solid rgba(85, 107, 47, 0.16) !important;
-    border-radius: 22px !important;
-    padding: 16px 14px !important;
-    margin: 0 !important;
-    box-shadow: 0 8px 22px rgba(60, 72, 50, 0.07) !important;
-    cursor: pointer !important;
-    transition: all 0.18s ease-in-out !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-align: center !important;
+.selected-category-check,
+.frequency-hint span {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--primary);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
 }
-
-div[role="radiogroup"] label p {
-    font-size: 15px !important;
-    font-weight: 750 !important;
-    color: #102a1f !important;
-    line-height: 1.35 !important;
-    white-space: normal !important;
-}
-
-div[role="radiogroup"] label:hover {
-    transform: translateY(-2px) !important;
-    border-color: rgba(47, 125, 50, 0.55) !important;
-    background: linear-gradient(135deg, #ffffff, #f5fbf1) !important;
-    box-shadow: 0 12px 28px rgba(60, 72, 50, 0.11) !important;
-}
-
-div[role="radiogroup"] label:has(input[aria-checked="true"]) {
-    border: 2px solid #2f7d32 !important;
-    background: linear-gradient(135deg, #f8fff5, #eef7e9) !important;
-    box-shadow: 0 12px 28px rgba(47, 125, 50, 0.16) !important;
-    position: relative !important;
-}
-
-div[role="radiogroup"] label:has(input[aria-checked="true"])::after {
-    content: "✓";
-    position: absolute;
-    top: 8px;
-    right: 10px;
-    width: 24px;
-    height: 24px;
-    border-radius: 999px;
-    background: #2f7d32;
-    color: white;
-    font-size: 14px;
-    font-weight: 900;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 6px 14px rgba(47, 125, 50, 0.28);
-}
-
-.selected-category-panel {
-    margin-top: 16px;
-    margin-bottom: 18px;
-    padding: 13px 16px;
-    border-radius: 18px;
-    background: rgba(240, 248, 237, 0.95);
-    border: 1px solid rgba(85, 107, 47, 0.13);
-    color: #31512d;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.selected-category-check {
-    width: 24px;
-    height: 24px;
-    border-radius: 999px;
-    background: #2f7d32;
-    color: white;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 900;
-}
-
-@media (max-width: 768px) {
-    div[role="radiogroup"] label {
-        min-width: 92px !important;
-        max-width: 112px !important;
-        min-height: 82px !important;
-        padding: 12px 10px !important;
-    }
-
-    div[role="radiogroup"] label p {
-        font-size: 13px !important;
-    }
-}
-</style>
-
-<style>
-/* =========================================================
-   Atividades com efeito papel + check imersivo
-========================================================= */
 
 .activity-paper-card {
-    position: relative;
-    background: #fffef8;
-    border: 1px solid rgba(120, 105, 70, 0.16);
-    border-radius: 18px;
-    padding: 16px 18px 16px 20px;
-    margin-bottom: 14px;
-    box-shadow: 0 8px 22px rgba(60, 72, 50, 0.07);
-    overflow: hidden;
+  position: relative;
+  background: #fffef8;
+  border: 1px solid rgba(120, 105, 70, 0.16);
+  border-radius: 15px;
+  padding: 14px 16px 14px 18px;
+  margin-bottom: 12px;
+  box-shadow: 0 8px 20px rgba(33, 79, 49, 0.08);
+  overflow: hidden;
 }
 
 .activity-paper-card.pending {
-    background:
-        linear-gradient(180deg, #fffefb 0%, #fffaf0 100%);
+  background: linear-gradient(180deg, #fffefb 0%, #fffaf0 100%);
 }
 
 .activity-paper-card.done {
-    background:
-        linear-gradient(180deg, #f7fbff 0%, #eef7ff 100%);
-    border-color: rgba(30, 136, 229, 0.20);
+  background: linear-gradient(180deg, #f3f9ff 0%, #ecf5ff 100%);
+  border-color: rgba(35, 132, 214, 0.23);
 }
 
 .activity-paper-line {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 6px;
-    height: 100%;
-    background: linear-gradient(180deg, #d9caa3, #cfc19a);
-    opacity: 0.65;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  background: linear-gradient(180deg, #dccca7, #ccb98f);
 }
 
 .activity-paper-card.done .activity-paper-line {
-    background: linear-gradient(180deg, #42a5f5, #1e88e5);
-    opacity: 0.9;
+  background: linear-gradient(180deg, #4fa7ea, #2c86cb);
 }
 
 .activity-card-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 5px;
 }
 
 .activity-card-icon {
-    width: 34px;
-    height: 34px;
-    border-radius: 999px;
-    background: #eef5ea;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: #eef5ea;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
 }
 
 .activity-title {
-    color: #25351f;
-    font-weight: 800;
-    font-size: 17px;
-    position: relative;
+  color: #25351f;
+  font-weight: 800;
+  font-size: 1rem;
+  position: relative;
 }
 
 .activity-title.done,
 .activity-desc.done {
-    color: #6b7c89;
+  color: #6b7c89;
 }
 
-/* Risco estilo caneta no título e na descrição */
 .activity-title.done::after {
-    content: "";
-    position: absolute;
-    left: -2px;
-    right: -4px;
-    top: 54%;
-    height: 3px;
-    background: rgba(30, 136, 229, 0.70);
-    border-radius: 999px;
-    transform: rotate(-1deg);
+  content: "";
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  top: 55%;
+  height: 3px;
+  background: rgba(35, 132, 214, 0.75);
+  border-radius: 999px;
 }
 
 .activity-desc.done {
-    text-decoration-line: line-through;
-    text-decoration-thickness: 2px;
-    text-decoration-color: rgba(30, 136, 229, 0.60);
+  text-decoration-line: line-through;
+  text-decoration-thickness: 2px;
+  text-decoration-color: rgba(35, 132, 214, 0.6);
 }
 
 .activity-meta {
-    color: #6f7869;
-    font-size: 13px;
-    margin-bottom: 4px;
+  color: #6f7869;
+  font-size: 0.78rem;
+  margin-bottom: 3px;
 }
 
 .activity-desc {
-    color: #52604c;
-    font-size: 14px;
+  color: #52604c;
+  font-size: 0.86rem;
 }
 
-/* Check pendente: botão claro */
-div[data-testid="stButton"] button[key^="complete_"] {
-    border-radius: 999px !important;
+div[role="radiogroup"] {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  align-items: stretch !important;
 }
 
-/* Estilo geral do botão de check das atividades */
-div[data-testid="stButton"] > button {
-    border-radius: 999px;
+div[role="radiogroup"] label > div:first-child {
+  display: none !important;
 }
 
-/* Check concluído azul */
-.check-button.done {
-    width: 42px;
-    height: 42px;
-    border-radius: 999px;
-    background: linear-gradient(135deg, #42a5f5, #1e88e5);
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    font-weight: 900;
-    box-shadow: 0 8px 18px rgba(30, 136, 229, 0.28);
-    margin-top: 14px;
-}
-
-/* Ajuste visual do botão pendente dentro da coluna esquerda */
-div[data-testid="column"]:has(button[kind="secondary"]) button {
-    min-height: 42px;
-    max-height: 42px;
-    color: #9fb29a !important;
-    background: #f5f9f2 !important;
-    border: 1px solid #dce8d5 !important;
-    font-size: 20px !important;
-    font-weight: 900 !important;
-    box-shadow: none !important;
-}
-
-div[data-testid="column"]:has(button[kind="secondary"]) button:hover {
-    color: #1e88e5 !important;
-    border-color: rgba(30, 136, 229, 0.45) !important;
-    background: #eef7ff !important;
-}
-
-/* Sensação de papel pautado discreto */
-.activity-paper-card::after {
-    content: "";
-    position: absolute;
-    left: 20px;
-    right: 18px;
-    bottom: 10px;
-    height: 1px;
-    background: rgba(120, 105, 70, 0.08);
-}
-</style>
-
-<style>
-/* =========================================================
-   Toggle de atividade: pendente <-> realizada
-========================================================= */
-
-/* Botão claro quando a atividade ainda não foi feita */
-button[title="Marcar como realizada"] {
-    min-height: 42px !important;
-    max-height: 42px !important;
-    border-radius: 999px !important;
-    color: #9fb29a !important;
-    background: #f5f9f2 !important;
-    border: 1px solid #dce8d5 !important;
-    font-size: 20px !important;
-    font-weight: 900 !important;
-    box-shadow: none !important;
-}
-
-button[title="Marcar como realizada"]:hover {
-    color: #1e88e5 !important;
-    border-color: rgba(30, 136, 229, 0.45) !important;
-    background: #eef7ff !important;
-}
-
-/* Botão azul quando a atividade já foi feita */
-button[title="Desmarcar atividade"] {
-    min-height: 42px !important;
-    max-height: 42px !important;
-    border-radius: 999px !important;
-    background: linear-gradient(135deg, #42a5f5, #1e88e5) !important;
-    color: #ffffff !important;
-    border: 1px solid rgba(30, 136, 229, 0.20) !important;
-    font-size: 20px !important;
-    font-weight: 900 !important;
-    box-shadow: 0 8px 18px rgba(30, 136, 229, 0.28) !important;
-}
-
-button[title="Desmarcar atividade"]:hover {
-    background: linear-gradient(135deg, #64b5f6, #1976d2) !important;
-    border-color: rgba(25, 118, 210, 0.35) !important;
-}
-
-/* Garante que o visual antigo do check concluído não apareça se existir CSS anterior */
-.check-button.done {
-    display: none !important;
-}
-</style>
-
-<style>
-/* =========================================================
-   Botão de cancelamento de agendamento
-========================================================= */
-button[title="Cancelar agendamento"] {
-    min-height: 38px !important;
-    max-height: 38px !important;
-    border-radius: 999px !important;
-    color: #9c6b6b !important;
-    background: #fff6f4 !important;
-    border: 1px solid #f1d2cc !important;
-    font-size: 20px !important;
-    font-weight: 800 !important;
-    box-shadow: none !important;
-}
-
-button[title="Cancelar agendamento"]:hover {
-    color: #ffffff !important;
-    background: #d65f4c !important;
-    border-color: #d65f4c !important;
-}
-</style>
-
-<style>
-/* =========================================================
-   Frequência simples: diária, semanal e uma vez
-========================================================= */
-
-.frequency-hint {
-    margin-top: 10px;
-    margin-bottom: 16px;
-    padding: 13px 16px;
-    border-radius: 18px;
-    background: rgba(240, 248, 237, 0.95);
-    border: 1px solid rgba(85, 107, 47, 0.13);
-    color: #31512d;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.frequency-hint span {
-    width: 24px;
-    height: 24px;
-    border-radius: 999px;
-    background: #2f7d32;
-    color: white;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 900;
+div[role="radiogroup"] label {
+  min-height: 42px !important;
+  background: #fff !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 14px !important;
+  padding: 10px 12px !important;
+  margin: 0 !important;
+  box-shadow: 0 6px 16px rgba(33, 79, 49, 0.08) !important;
+  cursor: pointer !important;
+  transition: all 0.18s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 div[role="radiogroup"] label p {
-    font-weight: 700 !important;
-}
-</style>
-
-<style>
-/* =========================================================
-   Responsividade da frequência e dias da semana
-========================================================= */
-
-div[data-testid="stRadio"] {
-    margin-bottom: 10px;
+  font-size: 0.88rem !important;
+  font-weight: 800 !important;
+  color: #22432f !important;
+  white-space: normal !important;
+  line-height: 1.25 !important;
 }
 
-/* Em telas menores, radios quebram linha de forma natural */
-div[role="radiogroup"] {
-    flex-wrap: wrap !important;
-    gap: 8px !important;
+div[role="radiogroup"] label:hover {
+  transform: translateY(-1px) !important;
+  background: #f4fbf1 !important;
+  border-color: rgba(47, 111, 66, 0.45) !important;
 }
 
-/* Opções de frequência mais compactas */
-div[role="radiogroup"] label {
-    min-height: 44px !important;
+div[role="radiogroup"] label:has(input[aria-checked="true"]) {
+  border: 2px solid var(--primary) !important;
+  background: linear-gradient(135deg, #f7fff4 0%, #edf7e9 100%) !important;
 }
 
-/* O seletor de dia da semana fica compacto em mobile */
+button[title="Marcar como realizada"] {
+  min-height: 40px !important;
+  border-radius: 999px !important;
+  color: #92a78f !important;
+  background: #f5f9f2 !important;
+  border: 1px solid #dce8d5 !important;
+  font-size: 1.1rem !important;
+  font-weight: 900 !important;
+}
+
+button[title="Marcar como realizada"]:hover {
+  color: #2c86cb !important;
+  border-color: rgba(44, 134, 203, 0.45) !important;
+  background: #eef7ff !important;
+}
+
+button[title="Desmarcar atividade"] {
+  min-height: 40px !important;
+  border-radius: 999px !important;
+  background: linear-gradient(135deg, #49a4eb, #2c86cb) !important;
+  color: #fff !important;
+  border: 1px solid rgba(44, 134, 203, 0.25) !important;
+  font-size: 1.1rem !important;
+  font-weight: 900 !important;
+}
+
+button[title="Cancelar agendamento"] {
+  min-height: 36px !important;
+  border-radius: 999px !important;
+  color: #9d6c6c !important;
+  background: #fff6f4 !important;
+  border: 1px solid #f2d2cb !important;
+  font-size: 1rem !important;
+  font-weight: 800 !important;
+}
+
+button[title="Cancelar agendamento"]:hover {
+  color: #fff !important;
+  background: #cd5a4b !important;
+  border-color: #cd5a4b !important;
+}
+
+div.stButton > button {
+  border-radius: 12px;
+  border: 0;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-strong) 100%);
+  color: #fff;
+  font-weight: 800;
+  min-height: 40px;
+}
+
+div.stButton > button:hover {
+  filter: brightness(1.06);
+}
+
+.section-intro {
+  margin: 0 0 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px dashed rgba(47, 111, 66, 0.25);
+  background: rgba(255, 255, 255, 0.65);
+  font-size: 0.9rem;
+  color: #315641;
+}
+
+.landing-highlight {
+  background: linear-gradient(145deg, #ffffff 0%, #f5fbf2 100%);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 14px 16px;
+  margin: 0 0 10px;
+  box-shadow: 0 10px 22px rgba(33, 79, 49, 0.09);
+}
+
+.landing-highlight h3 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+}
+
+.landing-highlight ol {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: #315641;
+  font-weight: 700;
+}
+
+.landing-highlight li {
+  margin: 0 0 4px;
+}
+
+.landing-cta {
+  background: linear-gradient(135deg, rgba(47, 111, 66, 0.1) 0%, rgba(242, 178, 76, 0.17) 100%);
+  border: 1px solid rgba(47, 111, 66, 0.2);
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.landing-cta strong {
+  color: #1a4530;
+}
+
+.landing-cta span {
+  color: #365b45;
+  font-size: 0.9rem;
+}
+
+.landing-figure {
+  background:
+    radial-gradient(circle at 24% 18%, rgba(255, 255, 255, 0.95) 0%, transparent 28%),
+    linear-gradient(140deg, #2f6f42 0%, #1d4a32 100%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 22px;
+  padding: 18px 14px;
+  min-height: 140px;
+  box-shadow: 0 20px 40px rgba(33, 79, 49, 0.26);
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.landing-figure-main {
+  font-size: 2.8rem;
+  line-height: 1;
+}
+
+.landing-figure-chip {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  padding: 4px 10px;
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+@media (max-width: 1024px) {
+  .hero-figure {
+    width: 110px;
+    min-width: 110px;
+    height: 110px;
+    font-size: 2.7rem;
+  }
+
+  .block-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
 @media (max-width: 768px) {
-    div[role="radiogroup"] label {
-        min-width: 72px !important;
-        max-width: 110px !important;
-        padding: 10px 8px !important;
-    }
+  .hero-card {
+    padding: 18px;
+    border-radius: 22px;
+  }
 
-    div[role="radiogroup"] label p {
-        font-size: 13px !important;
-    }
-}
-</style>
+  .hero-content {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 
-<style>
-/* =========================================================
-   Refinamento responsivo de frequência
-   Frequência fica fora do form para atualizar imediatamente
-========================================================= */
+  .hero-figure {
+    width: 100%;
+    min-width: 0;
+    height: 82px;
+    border-radius: 16px;
+    font-size: 2.1rem;
+  }
 
-.frequency-hint {
-    margin-top: 10px;
-    margin-bottom: 16px;
-    padding: 13px 16px;
-    border-radius: 18px;
-    background: rgba(240, 248, 237, 0.95);
-    border: 1px solid rgba(85, 107, 47, 0.13);
-    color: #31512d;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+  .hero-badges {
+    gap: 6px;
+  }
 
-.frequency-hint span {
-    width: 24px;
-    height: 24px;
-    border-radius: 999px;
-    background: #2f7d32;
-    color: white;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 900;
-}
+  .hero-badge {
+    font-size: 0.74rem;
+    padding: 5px 9px;
+  }
 
-/* Radios com quebra natural em telas menores */
-div[role="radiogroup"] {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 8px !important;
-}
+  .metric-card {
+    min-height: 96px;
+    padding: 13px;
+  }
 
-div[role="radiogroup"] label {
-    min-height: 42px !important;
-    padding: 9px 12px !important;
-}
+  .metric-value,
+  .summary-value {
+    font-size: 1.55rem;
+  }
 
-@media (max-width: 768px) {
-    div[role="radiogroup"] {
-        gap: 6px !important;
-    }
+  .activity-paper-card {
+    padding: 12px 12px 12px 14px;
+  }
 
-    div[role="radiogroup"] label {
-        min-width: 76px !important;
-        max-width: 100% !important;
-        padding: 9px 10px !important;
-    }
+  div[role="radiogroup"] label {
+    min-width: 88px !important;
+    max-width: 100% !important;
+    padding: 8px 10px !important;
+  }
 
-    div[role="radiogroup"] label p {
-        font-size: 13px !important;
-    }
+  div[role="radiogroup"] label p {
+    font-size: 0.8rem !important;
+  }
+
+  .section-intro,
+  .figure-card,
+  .tip-card,
+  .quote-card,
+  .soft-card,
+  .new-activity-panel {
+    border-radius: 14px;
+    padding: 10px 12px;
+  }
+
+  .figure-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+  }
+
+  .figure-copy strong {
+    font-size: 0.88rem;
+  }
+
+  .figure-copy span {
+    font-size: 0.78rem;
+  }
+
+  [data-testid="stSidebar"] .stButton > button,
+  [data-testid="stSidebar"] button {
+    min-height: 38px;
+    font-size: 0.88rem !important;
+  }
+
+  .landing-highlight,
+  .landing-cta,
+  .landing-figure {
+    border-radius: 14px;
+    padding: 10px 12px;
+  }
+
+  .landing-figure {
+    min-height: 98px;
+  }
+
+  .landing-figure-main {
+    font-size: 2.1rem;
+  }
+
+  .js-plotly-plot,
+  [data-testid="stPlotlyChart"] {
+    margin-bottom: 8px;
+  }
 }
 </style>

@@ -10,8 +10,10 @@ Aplicativo responsivo para cadastro por e-mail, criação e conclusão de ativid
 - Conclusão de atividades
 - Progresso do usuário
 - Dashboard Admin com cards, funil e retenção D1/D7/D30
+- Cuidador IA de Plantas com opções de diagnóstico e plano de cuidados
 - Integração Google Sheets via `sheets_repository.py`
 - Integração Google Analytics 4 via Measurement Protocol
+- Integração ChatGPT API para orientações de cuidado de plantas
 - Deploy pronto para Streamlit Community Cloud
 - Provérbios em `assets/proverbios.json`, sem gravar no banco
 
@@ -37,6 +39,14 @@ para:
 ```
 
 Preencha o `spreadsheet_id`, as credenciais da Service Account e, se quiser, as chaves do GA4.
+
+Para habilitar o Cuidador IA de Plantas, adicione também:
+
+```toml
+chatgpt_api_key = "sk-..."
+chatgpt_model = "gpt-4.1-mini"
+chatgpt_api_base_url = "https://api.openai.com/v1"
+```
 
 ## Abas do Google Sheets
 
@@ -64,6 +74,10 @@ admin_email = "admin@cuidafacil.com"
 2. Crie o app no Streamlit Cloud apontando para `app.py`.
 3. Em **App > Settings > Secrets**, cole o conteúdo do seu `secrets.toml`.
 4. Faça o deploy.
+
+## Documentação de arquitetura
+
+- Desenho da arquitetura da solução: [docs/arquitetura-solucao.md](docs/arquitetura-solucao.md)
 
 
 ## Ajustes de performance

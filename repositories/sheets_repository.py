@@ -32,6 +32,7 @@ REQUIRED_SHEETS = {
     ],
     "sessoes": ["id_sessao", "id_usuario", "data_hora_acesso"],
     "eventos_uso": ["id_evento", "id_usuario", "evento", "data_hora", "detalhes"],
+    "configuracoes": ["chave", "valor", "data_atualizacao"],
 }
 
 
@@ -304,6 +305,60 @@ class SheetsRepository:
         except Exception as exc:
             self.error_message = str(exc)
             return False
+
+
+    def upsert_config(self, chave: str, valor: str, data_atualizacao: str) -> bool:
+        if not self.enabled or not self.spreadsheet:
+            self.error_message = self.error_message or "Google Sheets não está conectado."
+            return False
+
+        try:
+            ws = self._worksheet("configuracoes")
+            values = ws.get_all_values()
+
+            if not values:
+                ws.append_row(REQUIRED_SHEETS["configuracoes"], value_input_option="USER_ENTERED")
+                values = ws.get_all_values()
+
+            headers = values[0]
+
+            if "chave" not in headers:
+                headers = REQUIRED_SHEETS["configuracoes"]
+                ws.update("1:1", [headers])
+
+            chave_idx = headers.index("chave")
+            valor_idx = headers.index("valor") + 1
+            data_idx = headers.index("data_atualizacao") + 1
+
+            for row_number, row in enumerate(values[1:], start=2):
+                atual = row[chave_idx] if chave_idx < len(row) else ""
+                if str(atual).strip() == str(chave).strip():
+                    ws.update_cell(row_number, valor_idx, valor)
+                    ws.update_cell(row_number, data_idx, data_atualizacao)
+                    return True
+
+            ws.append_row([chave, valor, data_atualizacao], value_input_option="USER_ENTERED")
+            return True
+
+        except Exception as exc:
+            self.error_message = f"Erro ao salvar configuração: {exc}"
+            return False
+
+    def read_config(self) -> dict[str, str]:
+        df = self.read("configuracoes")
+
+        if df.empty or "chave" not in df.columns or "valor" not in df.columns:
+            return {}
+
+        config: dict[str, str] = {}
+
+        for _, row in df.iterrows():
+            chave = str(row.get("chave", "")).strip()
+            valor = str(row.get("valor", "")).strip()
+            if chave:
+                config[chave] = valor
+
+        return config
 
     def status(self) -> dict[str, Any]:
         return {

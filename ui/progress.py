@@ -3,12 +3,26 @@ from __future__ import annotations
 import streamlit as st
 
 from services.app_service import user_progress_summary
-from ui.components import metric_card
+from ui.components import figure_card, metric_card
 
 
 def render_progress(user: dict) -> None:
     st.subheader("Meu progresso")
     st.write("O progresso agora considera apenas as atividades previstas pela agenda.")
+    st.markdown(
+        """
+        <div class="section-intro">
+            Visualize seu desempenho por período para ajustar rotina sem sobrecarga.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    c_intro1, c_intro2 = st.columns(2)
+    with c_intro1:
+        figure_card("📈", "Leitura rápida", "Compare previstas e concluídas para entender seu ritmo.")
+    with c_intro2:
+        figure_card("🎯", "Meta prática", "Busque consistência semanal acima de 70%.")
 
     summary = user_progress_summary(user)
 
